@@ -205,7 +205,7 @@ Find $$\frac{du}{dt}$$.
 ### Question 19: 
 
 
-If $$V=f(\frac{x}{y} , \frac{y}{z} , \frac{z}{x})
+If $$V=f(\frac{x}{y} , \frac{y}{z} , \frac{z}{x})$$
 
 show that: 
 
