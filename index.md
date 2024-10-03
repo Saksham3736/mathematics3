@@ -5,47 +5,51 @@
 ## Syllabus
 
 - Unit 2: __Partial differentiation__
-  -  
-  -  
-  -  
-  - 
+  -  Limit and Continuity
+  -  Partial differentiation
+  -  Variable Treated as Constant 
+  - Total Derivative 
+  - Partial Differentiation of Composite Functions: Change of Variables 
+  - Differentiation of an Implicit Function
+  - Euler's Theorem 
+  - Jacobian  
 
 | Content Table |
 |:-------:|
-| [Question 1](#question-1) |
-| [Question 2](#question-2) |
-| [Question 3](#question-3) |
-| [Question 4](#question-4) |
-| [Question 5](#question-5) |
-| [Question 6](#question-6) |
-| [Question 7](#question-7) |
-| [Question 8](#question-8) |
-| [Question 9](#question-9) |
-| [Question 10](#question-10) |
-| [Question 11](#question-11) |
-| [Question 12](#question-12) |
-| [Question 13](#question-13) |
-| [Question 14](#question-14) |
-| [Question 15](#question-15) |
-| [Question 16](#question-16) |
-| [Question 17](#question-17) |
-| [Question 18](#question-18) |
-| [Question 19](#question-19) |
-| [Question 20](#question-20) |
-| [Question 21](#question-21) |
-| [Question 22](#question-22) |
-| [Question 23](#question-23) |
-| [Question 24](#question-24) |
-| [Question 25](#question-25) |
-| [Question 26](#question-26) |
-| [Question 27](#question-27) |
-| [Question 28](#question-28) |
-| [Question 29](#question-29) |
-| [Question 30](#question-30) |
-| [Question 31](#question-31) |
-| [Question 32](#question-32) |
-| [Question 33](#question-33) |
-| [Question 34](#question-34) |
+| [Question 1: Limit and Continuity](#question-1) |
+| [Question 2: Limit and Continuity](#question-2) |
+| [Question 3: Limit and Continuity](#question-3) |
+| [Question 4: Limit and Continuity](#question-4) |
+| [Question 5: Partial differentiation](#question-5) |
+| [Question 6: Partial differentiation](#question-6) |
+| [Question 7: Partial differentiation](#question-7) |
+| [Question 8: Partial differentiation](#question-8) |
+| [Question 9: Partial differentiation](#question-9) |
+| [Question 10: Partial differentiation](#question-10) |
+| [Question 11: Variable Treated As Constant](#question-11) |
+| [Question 12: Variable Treated As Constant](#question-12) |
+| [Question 13: Variable Treated As Constant](#question-13) |
+| [Question 14: Total Derivative](#question-14) |
+| [Question 15: Total Derivative](#question-15) |
+| [Question 16: Total Derivative](#question-16) |
+| [Question 17: Partial Differentiation](#question-17) |
+| [Question 18: Total Derivative](#question-18) |
+| [Question 19: Partial Differentiation](#question-19) |
+| [Question 20: Partial Differentiation of Composite Functions: Change of Variables](#question-20) |
+| [Question 21:`controversial`](#question-21) |
+| [Question 22: Partial Differentiation of Composite Functions: Change of Variables](#question-22) |
+| [Question 23: Differentiation of an Implicit Function](#question-23) |
+| [Question 24: Differentiation of an Implicit Function](#question-24) |
+| [Question 25: Euler's Theorem](#question-25) |
+| [Question 26: Euler's Theorem](#question-26) |
+| [Question 27: Euler's Theorem](#question-27) |
+| [Question 28: Euler's Theorem](#question-28) |
+| [Question 29: Euler's Theorem](#question-29) |
+| [Question 30: Euler's Theorem](#question-30) |
+| [Question 31: Jacobian](#question-31) |
+| [Question 32: Jacobian](#question-32) |
+| [Question 33: Jacobian](#question-33) |
+| [Question 34: Jacobian](#question-34) |
 
 
 ### Question 1: 
