@@ -15,7 +15,7 @@
   - Jacobian  
 
 | Content Table |
-|:-------:|
+|---------|
 | [Question 1: Limit and Continuity](#question-1) |
 | [Question 2: Limit and Continuity](#question-2) |
 | [Question 3: Limit and Continuity](#question-3) |
