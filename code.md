@@ -686,4 +686,671 @@ int main(){
     }
 	return 0;
 }
+
+```
+```cpp
+//DS practical 17
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 100
+char stackArr[MAX];
+int top = -1;
+string infix, postfix;
+void push(char c) {
+    if (top == MAX - 1) {
+        cout << "Stack Overflow!" << endl;
+        return;
+    }
+    stackArr[++top] = c;
+}
+void pop() {
+    if (top == -1) {
+        cout << "Stack Underflow!" << endl;
+        return;
+    }
+    top--;
+}
+char peek() {
+    if (top == -1)
+        return '\0';
+    return stackArr[top];
+}
+int precedence(char op) {
+    if (op == '^')
+        return 3;
+    if (op == '*' || op == '/' || op == '%')
+        return 2;
+    if (op == '+' || op == '-')
+        return 1;
+    return 0;
+}
+bool isOperator(char c) {
+    return (c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^');
+}
+void infixToPostfix(string expr) {
+    postfix = "";
+    top = -1; // reset stack
+    for (char c : expr) {
+        if (isalnum(c)) {  // operand
+            postfix += c;
+        } 
+        else if (c == '(') {
+            push(c);
+        } 
+        else if (c == ')') {
+            while (top != -1 && peek() != '(') {
+                postfix += peek();
+                pop();
+            }
+            if (top != -1 && peek() == '(')
+                pop(); // remove '('
+        } 
+        else if (isOperator(c)) {
+            while (top != -1 && precedence(peek()) >= precedence(c) && c != '^') {
+                postfix += peek();
+                pop();
+            }
+            push(c);
+        }
+    }
+    while (top != -1) {
+        postfix += peek();
+        pop();
+    }
+    cout << "Postfix Expression: " << postfix << endl;
+}
+int main() {
+    int choice;
+        cout << "\n=== INFIX TO POSTFIX CONVERSION ===" << endl;
+        cout << "1. Convert Infix to Postfix" << endl;
+        cout << "2. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+    while (true) {
+        switch (choice) {
+            case 1:
+                cout << "Enter Infix Expression: ";
+                getline(cin, infix);
+                infixToPostfix(infix);
+                break;
+            case 2:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+return 0;
+}
+```
+```cpp
+//DS practical 18
+#include <bits/stdc++.h>
+using namespace std;
+int moveCount = 0;
+void towerOfHanoi(int n, char source, char auxiliary, char destination) {
+    if (n == 1) {
+        cout << "Move disk 1 from " << source << " to " << destination << endl;
+        moveCount++;
+        return;
+    }
+    towerOfHanoi(n - 1, source, destination, auxiliary);
+    cout << "Move disk " << n << " from " << source << " to " << destination << endl;
+    moveCount++;
+    towerOfHanoi(n - 1, auxiliary, source, destination);
+}
+int main() {
+    int choice, n;
+    cout << "=== Tower of Hanoi Problem ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Solve Tower of Hanoi\n";
+        cout << "2. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter number of disks: ";
+                cin >> n;
+                moveCount = 0;
+                cout << "\nMoves to solve Tower of Hanoi:\n";
+                towerOfHanoi(n, 'A', 'B', 'C'); // A=source, B=auxiliary, C=destination
+                cout << "\nTotal moves required: " << moveCount << endl;
+                break;
+            case 2:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+//DS practical 19
+#include <bits/stdc++.h>
+using namespace std;
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
+void partition(int arr[], int low, int high, int &pivotIndex) {
+    int pivot = arr[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    pivotIndex = i + 1;
+}
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi;
+        partition(arr, low, high, pi);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+void display(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+int main() {
+    int choice, n;
+    cout << "=== QuickSort Program ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Sort a List using QuickSort\n";
+        cout << "2. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:{
+                cout << "Enter number of elements: ";
+                cin >> n;
+                int arr[n];
+                cout << "Enter elements:\n";
+                for (int i = 0; i < n; i++)
+                    cin >> arr[i];
+                quickSort(arr, 0, n - 1);
+                cout << "Sorted list: ";
+                display(arr, n);
+                break;}
+            case 2:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+	return 0;
+}
+```
+```cpp
+//DS practical 20
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 100
+int queueArr[MAX];
+int frontIndex = -1, rearIndex = -1;
+void enqueue(int value) {
+    if (rearIndex == MAX - 1) {
+        cout << "Queue Overflow! Cannot insert " << value << "." << endl;
+        return;
+    }
+    if (frontIndex == -1) // first element
+        frontIndex = 0;
+    rearIndex++;
+    queueArr[rearIndex] = value;
+    cout << "Inserted " << value << " into queue successfully." << endl;
+}
+void dequeue() {
+    if (frontIndex == -1 || frontIndex > rearIndex) {
+        cout << "Queue Underflow! Queue is empty." << endl;
+        return;
+    }
+    cout << "Deleted element: " << queueArr[frontIndex] << endl;
+    frontIndex++;
+}
+void displayQueue() {
+    if (frontIndex == -1 || frontIndex > rearIndex) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+    cout << "Queue elements: ";
+    for (int i = frontIndex; i <= rearIndex; i++)
+        cout << queueArr[i] << " ";
+    cout << endl;
+}
+int main() {
+    int choice, value;
+    cout << "=== Linear Queue Implementation (Array) ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Insert (Enqueue)\n";
+        cout << "2. Delete (Dequeue)\n";
+        cout << "3. Display Queue\n";
+        cout << "4. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                enqueue(value);
+                break;
+            case 2:
+                dequeue();
+                break;
+            case 3:
+                displayQueue();
+                break;
+            case 4:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+// DS practical 21
+#include <bits/stdc++.h>
+using namespace std;
+struct Node {
+    int data;
+    Node* next;
+};
+Node* frontNode = nullptr;
+Node* rearNode = nullptr;
+void enqueue(int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = nullptr;
+    if (rearNode == nullptr) { // first element
+        frontNode = rearNode = newNode;
+    } else {
+        rearNode->next = newNode;
+        rearNode = newNode;
+    }
+    cout << "Inserted " << value << " into queue successfully." << endl;
+}
+void dequeue() {
+    if (frontNode == nullptr) {
+        cout << "Queue Underflow! Queue is empty." << endl;
+        return;
+    }
+    Node* temp = frontNode;
+    cout << "Deleted element: " << temp->data << endl;
+    frontNode = frontNode->next;
+    if (frontNode == nullptr) // queue became empty
+        rearNode = nullptr;
+    delete temp;
+}
+void displayQueue() {
+    if (frontNode == nullptr) {
+        cout << "Queue is empty." << endl;
+        return;
+    }
+    Node* temp = frontNode;
+    cout << "Queue elements: ";
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+int main() {
+    int choice, value;
+    cout << "=== Queue Implementation (Linked List) ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Insert (Enqueue)\n";
+        cout << "2. Delete (Dequeue)\n";
+        cout << "3. Display Queue\n";
+        cout << "4. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                enqueue(value);
+                break;
+            case 2:
+                dequeue();
+                break;
+            case 3:
+                displayQueue();
+                break;
+            case 4:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+//DS practical 22
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 5
+int queueArr[MAX];
+int frontIndex = -1, rearIndex = -1;
+void checkOverflow() {
+    if ((frontIndex == 0 && rearIndex == MAX - 1) || (rearIndex + 1) % MAX == frontIndex) {
+        cout << "Queue Overflow! Circular Queue is full." << endl;
+    } else {
+        cout << "No overflow. Space available in Circular Queue." << endl;
+    }
+}
+void checkUnderflow() {
+    if (frontIndex == -1) {
+        cout << "Queue Underflow! Circular Queue is empty." << endl;
+    } else {
+        cout << "No underflow. Circular Queue has elements." << endl;
+    }
+}
+void enqueue(int value) {
+    if ((frontIndex == 0 && rearIndex == MAX - 1) || (rearIndex + 1) % MAX == frontIndex) {
+        cout << "Queue Overflow! Cannot insert " << value << "." << endl;
+        return;
+    }
+    if (frontIndex == -1) // first element
+        frontIndex = rearIndex = 0;
+    else
+        rearIndex = (rearIndex + 1) % MAX;
+    queueArr[rearIndex] = value;
+    cout << "Inserted " << value << " into Circular Queue successfully." << endl;
+}
+void dequeue() {
+    if (frontIndex == -1) {
+        cout << "Queue Underflow! Circular Queue is empty." << endl;
+        return;
+    }
+    cout << "Deleted element: " << queueArr[frontIndex] << endl;
+    if (frontIndex == rearIndex) // only one element
+        frontIndex = rearIndex = -1;
+    else
+        frontIndex = (frontIndex + 1) % MAX;
+}
+void displayQueue() {
+    if (frontIndex == -1) {
+        cout << "Circular Queue is empty." << endl;
+        return;
+    }
+    cout << "Circular Queue elements: ";
+    int i = frontIndex;
+    while (true) {
+        cout << queueArr[i] << " ";
+        if (i == rearIndex)
+            break;
+        i = (i + 1) % MAX;
+    }
+    cout << endl;
+}
+int main() {
+    int choice, value;
+    cout << "=== Circular Queue Implementation (Array) ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Check Overflow\n";
+        cout << "2. Check Underflow\n";
+        cout << "3. Insert (Enqueue)\n";
+        cout << "4. Delete (Dequeue)\n";
+        cout << "5. Display Circular Queue\n";
+        cout << "6. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                checkOverflow();
+                break;
+            case 2:
+                checkUnderflow();
+                break;
+            case 3:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                enqueue(value);
+                break;
+            case 4:
+                dequeue();
+                break;
+            case 5:
+                displayQueue();
+                break;
+            case 6:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+//DS practical 23
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 5
+int dequeArr[MAX];
+int frontIndex = -1, rearIndex = -1;
+void checkOverflow() {
+    if ((frontIndex == 0 && rearIndex == MAX - 1) || (frontIndex == rearIndex + 1)) {
+        cout << "Deque Overflow! No space available." << endl;
+    } else {
+        cout << "No overflow. Space is available." << endl;
+    }
+}
+void checkUnderflow() {
+    if (frontIndex == -1) {
+        cout << "Deque Underflow! Deque is empty." << endl;
+    } else {
+        cout << "Deque has elements." << endl;
+    }
+}
+void insertFront(int value) {
+    if ((frontIndex == 0 && rearIndex == MAX - 1) || (frontIndex == rearIndex + 1)) {
+        cout << "Deque Overflow! Cannot insert " << value << " at front." << endl;
+        return;
+    }
+    if (frontIndex == -1) { // empty deque
+        frontIndex = rearIndex = 0;
+    } else if (frontIndex == 0) {
+        frontIndex = MAX - 1;
+    } else {
+        frontIndex--;
+    }
+    dequeArr[frontIndex] = value;
+    cout << "Inserted " << value << " at front successfully." << endl;
+}
+void insertRear(int value) {
+    if ((frontIndex == 0 && rearIndex == MAX - 1) || (frontIndex == rearIndex + 1)) {
+        cout << "Deque Overflow! Cannot insert " << value << " at rear." << endl;
+        return;
+    }
+    if (frontIndex == -1) { // empty deque
+        frontIndex = rearIndex = 0;
+    } else if (rearIndex == MAX - 1) {
+        rearIndex = 0;
+    } else {
+        rearIndex++;
+    }
+    dequeArr[rearIndex] = value;
+    cout << "Inserted " << value << " at rear successfully." << endl;
+}
+void deleteFront() {
+    if (frontIndex == -1) {
+        cout << "Deque Underflow! Cannot delete from front." << endl;
+        return;
+    }
+    cout << "Deleted element from front: " << dequeArr[frontIndex] << endl;
+    if (frontIndex == rearIndex) { // only one element
+        frontIndex = rearIndex = -1;
+    } else if (frontIndex == MAX - 1) {
+        frontIndex = 0;
+    } else {
+        frontIndex++;
+    }
+}
+void deleteRear() {
+    if (frontIndex == -1) {
+        cout << "Deque Underflow! Cannot delete from rear." << endl;
+        return;
+    }
+    cout << "Deleted element from rear: " << dequeArr[rearIndex] << endl;
+    if (frontIndex == rearIndex) { // only one element
+        frontIndex = rearIndex = -1;
+    } else if (rearIndex == 0) {
+        rearIndex = MAX - 1;
+    } else {
+        rearIndex--;
+    }
+}
+void displayDeque() {
+    if (frontIndex == -1) {
+        cout << "Deque is empty." << endl;
+        return;
+    }
+    cout << "Deque elements: ";
+    int i = frontIndex;
+    while (true) {
+        cout << dequeArr[i] << " ";
+        if (i == rearIndex) break;
+        i = (i + 1) % MAX;
+    }
+    cout << endl;
+}
+int main() {
+    int choice, value;
+    cout << "=== Deque (Array Implementation) ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Check Overflow\n";
+        cout << "2. Check Underflow\n";
+        cout << "3. Insert at Front\n";
+        cout << "4. Insert at Rear\n";
+        cout << "5. Delete from Front\n";
+        cout << "6. Delete from Rear\n";
+        cout << "7. Display Deque\n";
+        cout << "8. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1: checkOverflow(); break;
+            case 2: checkUnderflow(); break;
+            case 3:
+                cout << "Enter value to insert at front: ";
+                cin >> value;
+                insertFront(value);
+                break;
+            case 4:
+                cout << "Enter value to insert at rear: ";
+                cin >> value;
+                insertRear(value);
+                break;
+            case 5: deleteFront(); break;
+            case 6: deleteRear(); break;
+            case 7: displayDeque(); break;
+            case 8:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default: cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+// DS practical 24
+#include <bits/stdc++.h>
+using namespace std;
+#define MAX 100
+struct Element {
+    int data;
+    int priority;
+};
+Element pq[MAX];
+int size = 0;
+void insertPQ(int value, int prio) {
+    if (size == MAX) {
+        cout << "Priority Queue Overflow! Cannot insert." << endl;
+        return;
+    }
+    // insert in sorted order based on priority (higher priority first)
+    int i = size - 1;
+    while (i >= 0 && pq[i].priority < prio) {
+        pq[i + 1] = pq[i];
+        i--;
+    }
+    pq[i + 1].data = value;
+    pq[i + 1].priority = prio;
+    size++;
+    cout << "Inserted " << value << " with priority " << prio << " successfully." << endl;
+}
+void deletePQ() {
+    if (size == 0) {
+        cout << "Priority Queue Underflow! Queue is empty." << endl;
+        return;
+    }
+    cout << "Deleted element: " << pq[0].data << " with priority " << pq[0].priority << endl;
+    for (int i = 1; i < size; i++) {
+        pq[i - 1] = pq[i];
+    }
+    size--;
+}
+void displayPQ() {
+    if (size == 0) {
+        cout << "Priority Queue is empty." << endl;
+        return;
+    }
+    cout << "Priority Queue elements (Data:Priority): ";
+    for (int i = 0; i < size; i++) {
+        cout << pq[i].data << ":" << pq[i].priority << " ";
+    }
+    cout << endl;
+}
+int main() {
+    int choice, value, prio;
+    cout << "=== Priority Queue (Array Implementation) ===" << endl;
+        cout << "\nMenu:\n";
+        cout << "1. Insert into Priority Queue\n";
+        cout << "2. Delete from Priority Queue\n";
+        cout << "3. Display Priority Queue\n";
+        cout << "4. Exit\n";
+    while (true) {
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice) {
+            case 1:
+                cout << "Enter element value: ";
+                cin >> value;
+                cout << "Enter element priority (higher number = higher priority): ";
+                cin >> prio;
+                insertPQ(value, prio);
+                break;
+            case 2:
+                deletePQ();
+                break;
+            case 3:
+                displayPQ();
+                break;
+            case 4:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
 ```
