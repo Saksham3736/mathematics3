@@ -49,12 +49,12 @@ private:
     }
 public:
     Student() : Person(), total(0), average(0), grade('F') {
-        for (float &m : marks) m = 0;
+        for (float &m : marks) m = 0;//Edit
     }
     void input() override {
         Person::input();
         cout << "Enter marks for 3 subjects: ";
-        for (float &m : marks) cin >> m;
+        for (float &m : marks) cin >> m;//Edit
         calculateGrade();
     }
     void display() const override {
@@ -74,7 +74,7 @@ public:
     }
     void editMarks() {
         cout << "Enter new marks for 3 subjects: ";
-        for (float &m : marks) cin >> m;
+        for (float &m : marks) cin >> m;//Edit
         calculateGrade();
     }
     void save(ofstream &out) const {
@@ -159,7 +159,7 @@ void addStudent() {
     cout << "Student added successfully!\n";
 }
 void showAllStudents() {
-    if (!fileExists("students.txt")) { cout << "No student data found!\n"; return; }
+    if (!fileExists("students.txt")){ cout << "No student data found!\n"; return; }
     ifstream fin("students.txt");
     Student s; string line;
 
@@ -381,4 +381,5 @@ Press Enter to continue...
 Enter your choice: 7
 
 Exiting...
+
 ```
