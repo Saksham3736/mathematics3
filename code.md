@@ -244,9 +244,9 @@ int main() {
         cout << "5. Delete First"<<endl;
         cout << "6. Delete Last"<<endl;
         cout << "7. Exit"<<endl;
+		while(true){
         cout << "Enter your choice: ";
         cin >> choice;
-		while(true){
 			switch (choice) {
             case 1: dll.insertFront(); break;
             case 2: dll.insertEnd(); break;
@@ -1354,3 +1354,4 @@ int main() {
     }
 }
 ```
+
