@@ -1354,4 +1354,948 @@ int main() {
     }
 }
 ```
+```cpp
+// DS practical 25
+#include <bits/stdc++.h>
+using namespace std;
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+// Create a new node
+Node* createNode(int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->left = newNode->right = NULL;
+    return newNode;
+}
+// a) Insert a node in BST
+void insertNode(Node*& root, int value) {
+    if (root == NULL) {
+        root = createNode(value);
+        cout << "Inserted " << value << " successfully." << endl;
+        return;
+    }
+    if (value < root->data)
+        insertNode(root->left, value);
+    else if (value > root->data)
+        insertNode(root->right, value);
+    else
+        cout << "Duplicate values not allowed in BST!" << endl;
+}
+// b) Traverse BST - Inorder
+void inorder(Node* root) {
+    if (root == NULL) return;
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+// Preorder
+void preorder(Node* root) {
+    if (root == NULL) return;
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+// Postorder
+void postorder(Node* root) {
+    if (root == NULL) return;
+    postorder(root->left);
+    postorder(root->right);
+    cout << root->data << " ";
+}
+// c) Search for an element
+void searchNode(Node* root, int key) {
+    if (root == NULL) {
+        cout << "Element not found in BST." << endl;
+        return;
+    }
+    if (root->data == key)
+        cout << "Element " << key << " found in BST." << endl;
+    else if (key < root->data)
+        searchNode(root->left, key);
+    else
+        searchNode(root->right, key);
+}
+
+// d) Delete a node from BST
+Node* findMin(Node* root) {
+    while (root->left != NULL)
+        root = root->left;
+    return root;
+}
+Node* deleteNode(Node* root, int key) {
+    if (root == NULL) return root;
+
+    if (key < root->data)
+        root->left = deleteNode(root->left, key);
+    else if (key > root->data)
+        root->right = deleteNode(root->right, key);
+    else {
+        // Node found
+        if (root->left == NULL && root->right == NULL) {
+            delete root;
+            return NULL;
+        }
+        else if (root->left == NULL) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->right == NULL) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        else {
+            Node* temp = findMin(root->right);
+            root->data = temp->data;
+            root->right = deleteNode(root->right, temp->data);
+        }
+    }
+    return root;
+}
+// e) Display all traversals
+void displayTraversals(Node* root) {
+    if (root == NULL) {
+        cout << "BST is empty." << endl;
+        return;
+    }
+    cout << "Inorder Traversal: ";
+    inorder(root);
+    cout << "\nPreorder Traversal: ";
+    preorder(root);
+    cout << "\nPostorder Traversal: ";
+    postorder(root);
+    cout << endl;
+}
+
+// Main function with menu
+int main() {
+    Node* root = NULL;
+    int choice, value;
+    cout << "=== Binary Search Tree (BST) Implementation ===" << endl;
+    while (true) {
+        cout << "\nMenu:\n";
+        cout << "1. Insert Element\n";
+        cout << "2. Traverse BST (Inorder, Preorder, Postorder)\n";
+        cout << "3. Search Element\n";
+        cout << "4. Delete Element\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                cout << "Enter value to insert: ";
+                cin >> value;
+                insertNode(root, value);
+                break;
+            case 2:
+                displayTraversals(root);
+                break;
+            case 3:
+                cout << "Enter element to search: ";
+                cin >> value;
+                searchNode(root, value);
+                break;
+            case 4:
+                cout << "Enter element to delete: ";
+                cin >> value;
+                root = deleteNode(root, value);
+                cout << "If element existed, it has been deleted." << endl;
+                break;
+            case 5:
+                cout << "Exiting program..." << endl;
+                return 0;
+            default:
+                cout << "Invalid choice! Try again." << endl;
+        }
+    }
+}
+```
+```cpp
+//DS practical 26
+#include <bits/stdc++.h>
+using namespace std;
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    int height;
+};
+// Get height of node
+int getHeight(Node* n) {
+    return (n == NULL) ? 0 : n->height;
+}
+// Get balance factor
+int getBalance(Node* n) {
+    return (n == NULL) ? 0 : getHeight(n->left) - getHeight(n->right);
+}
+// Create new node
+Node* createNode(int value) {
+    Node* node = new Node();
+    node->data = value;
+    node->left = node->right = NULL;
+    node->height = 1;
+    return node;
+}
+// Right rotation
+Node* rightRotate(Node* y) {
+    Node* x = y->left;
+    Node* T2 = x->right;
+    x->right = y;
+    y->left = T2;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    return x;
+}
+// Left rotation
+Node* leftRotate(Node* x) {
+    Node* y = x->right;
+    Node* T2 = y->left;
+    y->left = x;
+    x->right = T2;
+    x->height = max(getHeight(x->left), getHeight(x->right)) + 1;
+    y->height = max(getHeight(y->left), getHeight(y->right)) + 1;
+    return y;
+}
+// Insert node (void function)
+void insertNode(Node*& root, int key) {
+    if (root == NULL) {
+        root = createNode(key);
+        cout << "Inserted " << key << " into AVL Tree.\n";
+        return;
+    }
+
+    if (key < root->data)
+        insertNode(root->left, key);
+    else if (key > root->data)
+        insertNode(root->right, key);
+    else {
+        cout << "Duplicate values not allowed!\n";
+        return;
+    }
+
+    root->height = 1 + max(getHeight(root->left), getHeight(root->right));
+    int balance = getBalance(root);
+    // Balancing rotations
+    if (balance > 1 && key < root->left->data)
+        root = rightRotate(root);
+    else if (balance < -1 && key > root->right->data)
+        root = leftRotate(root);
+    else if (balance > 1 && key > root->left->data) {
+        root->left = leftRotate(root->left);
+        root = rightRotate(root);
+    } else if (balance < -1 && key < root->right->data) {
+        root->right = rightRotate(root->right);
+        root = leftRotate(root);
+    }
+}
+// Search in AVL
+void searchNode(Node* root, int key) {
+    if (root == NULL) {
+        cout << "Element not found.\n";
+        return;
+    }
+    if (root->data == key)
+        cout << "Element " << key << " found in AVL Tree.\n";
+    else if (key < root->data)
+        searchNode(root->left, key);
+    else
+        searchNode(root->right, key);
+}
+// Find node with minimum value
+Node* minValueNode(Node* node) {
+    Node* current = node;
+    while (current && current->left != NULL)
+        current = current->left;
+    return current;
+}
+// Delete node (void version)
+void deleteNode(Node*& root, int key) {
+    if (root == NULL) {
+        cout << "Element not found.\n";
+        return;
+    }
+    if (key < root->data)
+        deleteNode(root->left, key);
+    else if (key > root->data)
+        deleteNode(root->right, key);
+    else {
+        if ((root->left == NULL) || (root->right == NULL)) {
+            Node* temp = (root->left) ? root->left : root->right;
+            if (temp == NULL) {
+                delete root;
+                root = NULL;
+            } else {
+                *root = *temp;
+                delete temp;
+            }
+            cout << "Deleted " << key << " from AVL Tree.\n";
+        } else {
+            Node* temp = minValueNode(root->right);
+            root->data = temp->data;
+            deleteNode(root->right, temp->data);
+        }
+    }
+
+    if (root == NULL)
+        return;
+    root->height = 1 + max(getHeight(root->left), getHeight(root->right));
+    int balance = getBalance(root);
+    // Balance rotations
+    if (balance > 1 && getBalance(root->left) >= 0)
+        root = rightRotate(root);
+    else if (balance > 1 && getBalance(root->left) < 0) {
+        root->left = leftRotate(root->left);
+        root = rightRotate(root);
+    } else if (balance < -1 && getBalance(root->right) <= 0)
+        root = leftRotate(root);
+    else if (balance < -1 && getBalance(root->right) > 0) {
+        root->right = rightRotate(root->right);
+        root = leftRotate(root);
+    }
+}
+// Inorder traversal
+void inorder(Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        cout << root->data << " ";
+        inorder(root->right);
+    }
+}
+int main() {
+    Node* root = NULL;
+    int choice, value;
+
+    while (true) {
+        cout << "\n--- AVL Tree Menu ---\n";
+        cout << "1. Insert\n2. Search\n3. Delete\n4. Display (Inorder)\n5. Exit\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            cout << "Enter value to insert: ";
+            cin >> value;
+            insertNode(root, value);
+            break;
+        case 2:
+            cout << "Enter value to search: ";
+            cin >> value;
+            searchNode(root, value);
+            break;
+        case 3:
+            cout << "Enter value to delete: ";
+            cin >> value;
+            deleteNode(root, value);
+            break;
+        case 4:
+            cout << "Inorder Traversal: ";
+            inorder(root);
+            cout << endl;
+            break;
+        case 5:
+            cout << "Exiting...\n";
+            return 0;
+        default:
+            cout << "Invalid choice!\n";
+        }
+    }
+}
+```
+```cpp
+// DS pratical 27
+#include <bits/stdc++.h>
+using namespace std;
+// Function to heapify a subtree rooted at index i
+void heapify(int arr[], int n, int i) {
+    int largest = i;       // Initialize largest as root
+    int left = 2 * i + 1;  // left child index
+    int right = 2 * i + 2; // right child index
+    // If left child is larger than root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+    // If right child is larger than largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+    // If largest is not root
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest); // Recursively heapify the affected subtree
+    }
+}
+// Function to perform heapsort
+void heapSort(int arr[], int n) {
+    // Step 1: Build a max heap
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+    // Step 2: Extract elements one by one from the heap
+    for (int i = n - 1; i >= 0; i--) {
+        swap(arr[0], arr[i]);   // Move current root to end
+        heapify(arr, i, 0);     // Heapify the reduced heap
+    }
+}
+// Function to display the array
+void display(int arr[], int n) {
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+// Main function
+int main() {
+    int n;
+    cout << "Enter number of elements: ";
+    cin >> n;
+    int arr[n];
+
+    cout << "Enter elements:\n";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    cout << "\nOriginal array: ";
+    display(arr, n);
+
+    heapSort(arr, n);
+
+    cout << "Sorted array (Heapsort): ";
+    display(arr, n);
+
+    return 0;
+}
+```
+```cpp
+// DS practical 28
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MAX 20
+int adj[MAX][MAX];   // Adjacency matrix
+int n;               // Number of cities
+bool visited[MAX];   // Visited array for DFS and BFS
+
+// Function to create a graph using adjacency matrix
+void createGraph() {
+    cout << "Enter number of cities: ";
+    cin >> n;
+
+    cout << "Enter adjacency matrix (" << n << "x" << n << "):\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> adj[i][j];
+        }
+    }
+    cout << "Graph created successfully.\n";
+}
+
+// Function for DFS traversal
+void DFS(int v) {
+    visited[v] = true;
+    cout << v << " ";
+
+    for (int i = 0; i < n; i++) {
+        if (adj[v][i] == 1 && !visited[i])
+            DFS(i);
+    }
+}
+
+void performDFS() {
+    int start;
+    cout << "Enter starting city (0 to " << n - 1 << "): ";
+    cin >> start;
+
+    for (int i = 0; i < n; i++)
+        visited[i] = false;
+
+    cout << "DFS Traversal: ";
+    DFS(start);
+    cout << endl;
+}
+
+// Function for BFS traversal
+void performBFS() {
+    int start;
+    cout << "Enter starting city (0 to " << n - 1 << "): ";
+    cin >> start;
+
+    for (int i = 0; i < n; i++)
+        visited[i] = false;
+
+    queue<int> q;
+    visited[start] = true;
+    q.push(start);
+
+    cout << "BFS Traversal: ";
+    while (!q.empty()) {
+        int v = q.front();
+        q.pop();
+        cout << v << " ";
+
+        for (int i = 0; i < n; i++) {
+            if (adj[v][i] == 1 && !visited[i]) {
+                visited[i] = true;
+                q.push(i);
+            }
+        }
+    }
+    cout << endl;
+}
+
+// Display adjacency matrix
+void displayGraph() {
+    cout << "\nAdjacency Matrix:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << adj[i][j] << " ";
+        cout << endl;
+    }
+}
+
+// Main function with menu
+int main() {
+    int choice;
+    cout << "=== Graph Representation and Traversal ===\n";
+    cout << "Menu:\n";
+    cout << "1. Create Graph (Adjacency Matrix)\n";
+    cout << "2. Display Graph\n";
+    cout << "3. DFS Traversal\n";
+    cout << "4. BFS Traversal\n";
+    cout << "5. Exit\n";
+
+    while (true) {
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                createGraph();
+                break;
+            case 2:
+                displayGraph();
+                break;
+            case 3:
+                performDFS();
+                break;
+            case 4:
+                performBFS();
+                break;
+            case 5:
+                cout << "Exiting program...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+}
+```
+```cpp
+// DS practical 29
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MAX 20
+
+int n;                   // Number of vertices
+int cost[MAX][MAX];      // Adjacency matrix for cost
+
+// Function to create graph
+void createGraph() {
+    cout << "Enter number of vertices: ";
+    cin >> n;
+
+    cout << "Enter the cost adjacency matrix (" << n << "x" << n << "):\n";
+    cout << "(Enter 0 if there is no edge between two vertices)\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> cost[i][j];
+            if (cost[i][j] == 0)
+                cost[i][j] = 999; // Represent no edge with high value
+        }
+    }
+}
+
+// --------- PRIM'S ALGORITHM ---------
+void primsMST() {
+    int selected[MAX];
+    memset(selected, 0, sizeof(selected));
+    int total = 0, edges = 0;
+
+    selected[0] = 1; // Start from vertex 0
+
+    cout << "\nEdges in the Minimum Spanning Tree (Prim's):\n";
+    while (edges < n - 1) {
+        int minCost = 999, x = 0, y = 0;
+        for (int i = 0; i < n; i++) {
+            if (selected[i]) {
+                for (int j = 0; j < n; j++) {
+                    if (!selected[j] && cost[i][j] < minCost) {
+                        minCost = cost[i][j];
+                        x = i;
+                        y = j;
+                    }
+                }
+            }
+        }
+        cout << x << " - " << y << " : " << cost[x][y] << endl;
+        total += cost[x][y];
+        selected[y] = 1;
+        edges++;
+    }
+    cout << "Total cost of MST (Prim's) = " << total << endl;
+}
+
+// --------- KRUSKAL'S ALGORITHM ---------
+int parent[MAX];
+
+// Function to find parent (for Kruskal’s)
+int findParent(int i) {
+    while (parent[i] != i)
+        i = parent[i];
+    return i;
+}
+
+// Function to perform union operation
+void unionSets(int i, int j) {
+    int a = findParent(i);
+    int b = findParent(j);
+    parent[a] = b;
+}
+
+void kruskalsMST() {
+    int minCost = 0, edgeCount = 0;
+
+    // Initialize parent array
+    for (int i = 0; i < n; i++)
+        parent[i] = i;
+
+    cout << "\nEdges in the Minimum Spanning Tree (Kruskal's):\n";
+    while (edgeCount < n - 1) {
+        int a = -1, b = -1, min = 999;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (findParent(i) != findParent(j) && cost[i][j] < min) {
+                    min = cost[i][j];
+                    a = i;
+                    b = j;
+                }
+            }
+        }
+
+        unionSets(a, b);
+        cout << a << " - " << b << " : " << min << endl;
+        edgeCount++;
+        minCost += min;
+    }
+
+    cout << "Total cost of MST (Kruskal's) = " << minCost << endl;
+}
+
+// Function to display cost adjacency matrix
+void displayGraph() {
+    cout << "\nCost Adjacency Matrix:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++)
+            cout << (cost[i][j] == 999 ? 0 : cost[i][j]) << " ";
+        cout << endl;
+    }
+}
+
+// Main function (menu-driven)
+int main() {
+    int choice;
+    cout << "=== Minimum Spanning Tree Algorithms ===\n";
+    cout << "Menu:\n";
+    cout << "1. Create Graph (Cost Matrix)\n";
+    cout << "2. Display Graph\n";
+    cout << "3. Find MST using Prim's Algorithm\n";
+    cout << "4. Find MST using Kruskal's Algorithm\n";
+    cout << "5. Exit\n";
+
+    while (true) {
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                createGraph();
+                break;
+            case 2:
+                displayGraph();
+                break;
+            case 3:
+                primsMST();
+                break;
+            case 4:
+                kruskalsMST();
+                break;
+            case 5:
+                cout << "Exiting program...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+}
+```
+```cpp
+// DS practical 30
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MAX 20
+#define INF 999
+
+int n;                 // Number of vertices
+int cost[MAX][MAX];    // Cost adjacency matrix
+int dist[MAX];         // Shortest distance array
+int visited[MAX];      // Visited array
+
+// Function to create graph
+void createGraph() {
+    cout << "Enter number of vertices: ";
+    cin >> n;
+    cout << "Enter the cost adjacency matrix (" << n << "x" << n << "):\n";
+    cout << "(Enter 0 if there is no edge between two vertices)\n";
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> cost[i][j];
+            if (cost[i][j] == 0 && i != j)
+                cost[i][j] = INF; // No edge represented by INF
+        }
+    }
+    cout << "Graph created successfully.\n";
+}
+
+// Function to display cost matrix
+void displayGraph() {
+    cout << "\nCost Adjacency Matrix:\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (cost[i][j] == INF)
+                cout << "∞ ";
+            else
+                cout << cost[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+// Dijkstra’s Algorithm
+void dijkstra() {
+    int src;
+    cout << "Enter the source vertex (0 to " << n - 1 << "): ";
+    cin >> src;
+
+    for (int i = 0; i < n; i++) {
+        dist[i] = cost[src][i];
+        visited[i] = 0;
+    }
+    dist[src] = 0;
+    visited[src] = 1;
+
+    for (int count = 1; count < n - 1; count++) {
+        int minDist = INF, u = -1;
+
+        // Find unvisited vertex with minimum distance
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && dist[i] < minDist) {
+                minDist = dist[i];
+                u = i;
+            }
+        }
+
+        if (u == -1) break; // All reachable vertices processed
+
+        visited[u] = 1;
+
+        // Update distances of adjacent vertices
+        for (int v = 0; v < n; v++) {
+            if (!visited[v] && cost[u][v] != INF && dist[u] + cost[u][v] < dist[v])
+                dist[v] = dist[u] + cost[u][v];
+        }
+    }
+
+    cout << "\nShortest distances from source vertex " << src << ":\n";
+    for (int i = 0; i < n; i++) {
+        cout << "To vertex " << i << " : ";
+        if (dist[i] == INF)
+            cout << "No path\n";
+        else
+            cout << dist[i] << endl;
+    }
+}
+
+// Main function
+int main() {
+    int choice;
+    cout << "=== Dijkstra’s Shortest Path Algorithm ===\n";
+    cout << "Menu:\n";
+    cout << "1. Create Graph (Cost Matrix)\n";
+    cout << "2. Display Graph\n";
+    cout << "3. Find Shortest Path using Dijkstra’s Algorithm\n";
+    cout << "4. Exit\n";
+
+    while (true) {
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                createGraph();
+                break;
+            case 2:
+                displayGraph();
+                break;
+            case 3:
+                dijkstra();
+                break;
+            case 4:
+                cout << "Exiting program...\n";
+                return 0;
+            default:
+                cout << "Invalid choice! Try again.\n";
+        }
+    }
+}
+```
+```cpp
+// DS practical 31
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MAX 10   // Size of hash table
+int hashTable[MAX];
+
+// Function to initialize hash table
+void initialize() {
+    for (int i = 0; i < MAX; i++)
+        hashTable[i] = -1; // -1 means empty slot
+    cout << "Hash Table initialized successfully.\n";
+}
+
+// Hash function
+int hashFunction(int key) {
+    return key % MAX;
+}
+
+// Function to insert key using Linear Probing
+void insertElement() {
+    int key;
+    cout << "Enter key to insert: ";
+    cin >> key;
+
+    int index = hashFunction(key);
+    int originalIndex = index;
+    int flag = 0;
+
+    while (hashTable[index] != -1) {
+        index = (index + 1) % MAX;
+        if (index == originalIndex) {
+            flag = 1;
+            break;
+        }
+    }
+
+    if (flag)
+        cout << "Hash Table is full! Cannot insert key.\n";
+    else {
+        hashTable[index] = key;
+        cout << "Key " << key << " inserted at index " << index << ".\n";
+    }
+}
+
+// Function to search for a key
+void searchElement() {
+    int key;
+    cout << "Enter key to search: ";
+    cin >> key;
+
+    int index = hashFunction(key);
+    int originalIndex = index;
+    int flag = 0;
+
+    while (hashTable[index] != -1) {
+        if (hashTable[index] == key) {
+            cout << "Key " << key << " found at index " << index << ".\n";
+            flag = 1;
+            break;
+        }
+        index = (index + 1) % MAX;
+        if (index == originalIndex)
+            break;
+    }
+
+    if (!flag)
+        cout << "Key " << key << " not found in the hash table.\n";
+}
+
+// Function to delete a key
+void deleteElement() {
+    int key;
+    cout << "Enter key to delete: ";
+    cin >> key;
+
+    int index = hashFunction(key);
+    int originalIndex = index;
+    int flag = 0;
+
+    while (hashTable[index] != -1) {
+        if (hashTable[index] == key) {
+            hashTable[index] = -1;
+            cout << "Key " << key << " deleted from index " << index << ".\n";
+            flag = 1;
+            break;
+        }
+        index = (index + 1) % MAX;
+        if (index == originalIndex)
+            break;
+    }
+
+    if (!flag)
+        cout << "Key " << key << " not found.\n";
+}
+
+// Function to display the hash table
+void display() {
+    cout << "\n--- Hash Table Status ---\n";
+    for (int i = 0; i < MAX; i++) {
+        cout << "Index " << i << " : ";
+        if (hashTable[i] == -1)
+            cout << "Empty\n";
+        else
+            cout << hashTable[i] << endl;
+    }
+}
+
+// Main function
+int main() {
+    int choice;
+    initialize();
+
+    cout << "\n=== Hash Table Implementation (Linear Probing) ===\n";
+    cout << "Menu:\n";
+    cout << "1. Insert an Element\n";
+    cout << "2. Search for an Element\n";
+    cout << "3. Delete an Element\n";
+    cout << "4. Display Hash Table\n";
+    cout << "5. Exit\n";
+
+    while (true) {
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: insertElement(); break;
+            case 2: searchElement(); break;
+            case 3: deleteElement(); break;
+            case 4: display(); break;
+            case 5: cout << "Exiting program...\n"; return 0;
+            default: cout << "Invalid choice! Try again.\n";
+        }
+    }
+}
+```
 
