@@ -1,0 +1,723 @@
+%Experiment 4
+%Develop a LaTeX script to create a simple document that consists of 2 sections 
+%[Section1, Section2], and a paragraph with dummy text in each section. And also 
+%include header [title of document] and footer [institute name, page number] in 
+%the document. 
+\documentclass[12pt]{article} % Document type and font size
+\usepackage{graphicx} % For image support
+\usepackage{fancyhdr} % For custom header and footer
+\usepackage{lipsum}  % For dummy text generation
+\pagestyle{fancy}    % Activate fancy page style
+\fancyhf{}            % Clear default header and footer
+\fancyhead[C]{THE HINDUSTAN TIMES}
+% Header: document title
+\fancyfoot[L]{GNDEC,LUDHIANA}
+% Footer left: institute name
+\fancyfoot[C]{\thepage}
+% Footer center: page number
+\fancyfoot[R]{URN:2435157}
+% Footer right: registration number
+\begin{document}
+% Begin document content
+\section{Lorem Ipsum Dolor}
+% Section 1
+\lipsum[1][1-3]
+% Dummy paragraph
+\subsection{Sit Amet Consectetur}
+% Subsection under Section 1
+\lipsum[2][1-3]
+% Dummy paragraph
+\section{Adipiscing Elit Sed}
+% Section 2
+\lipsum[3][1-3]
+% Dummy paragraph
+\subsection{Eiusmod Tempor Incididunt}
+% Subsection under Section 2
+\lipsum[4][1-3]
+% Dummy paragraph
+\subsection{Ut Labore Et}
+% Another subsection under Section 2
+\lipsum[5][1-3]
+% Dummy paragraph
+\end{document}
+% End of document
+
+
+
+
+%Experiment 5
+%Develop a LaTeX script to create a document that displays the sample 
+%Abstract/Summary.  
+\documentclass{article}                          % Use the standard article class
+\usepackage{lipsum}                              % Package to generate dummy text
+\title{Experiment-05: Sample Abstract}           % Document title
+\author{Saksham}                                 % Author name
+\date{}                                          % Empty date
+\begin{document}	                             % Begin document content
+\maketitle                                       % Generates the title, author, and date
+\begin{abstract}
+This is a sample abstract.
+It provides a summary of the document, including the purpose, methodology, and
+conclusions.
+The abstract should be concise, usually not more than 200 words, and allow readers
+to quickly understand the scope of the work.
+\end{abstract}                                   % Abstract section
+\section{Introduction}
+\lipsum[1]                                       % Dummy text for the Introduction section
+\section{Conclusion}
+\lipsum[1]                                       % Dummy text for the Conclusion section
+\end{document}                                   % End of the document
+
+
+
+
+
+
+%Experiment 6
+%Develop a LaTeX script to create the Certificate Page of the Report [Use suitable 
+%commands to leave the blank spaces for user entry]. 
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace} \usepackage{fancyhdr}
+\usepackage{ragged2e} \usepackage{times}
+\setstretch{1.25} \pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[L]{\textbf{Guru Nanak Dev Engineering College, Ludhiana}}
+\fancyhead[R]{\textbf{Department of CSE}}
+\begin{document}
+\begin{titlepage}
+\begin{center}
+{\Large \textbf{Guru Nanak Dev Engineering College, Ludhiana}}\\[0.2cm]
+{\large (An Autonomous College under UGC Act)}\\[0.3cm]
+\rule{\textwidth}{0.6pt}\\[1cm]
+{\LARGE \textbf{CERTIFICATE}}\\[1.2cm]
+\noindent
+\begin{minipage}{0.9\textwidth}
+\justifying
+This is to certify that the project/report entitled
+\textbf{"\underline{\hspace{6cm}}"}, 
+\textbf{\underline{\hspace{5.5cm}}},
+submitted by 
+\textbf{Branch: Computer Science and Engineering}, bearing
+University Roll No. \textbf{\underline{\hspace{4cm}}}, in partial
+fulfillment of the requirements for the award of the degree of
+\textbf{\underline{\hspace{6cm}}} to \textbf{Guru Nanak Dev
+Engineering College (Autonomous), Ludhiana}, is a bonafide record
+of the work carried out by him/her under my supervision and
+guidance during the academic year
+\textbf{\underline{\hspace{4cm}}}.
+\end{minipage}
+\vspace{2cm}
+\begin{minipage}{0.47\textwidth}
+\centering
+\textbf{Signature of the Guide}\\[1cm]
+\begin{tabular}{@{}l@{}}
+Name: \underline{\hspace{6cm}} \\[0.5cm]
+Designation: \underline{\hspace{5cm}} \\[0.5cm]
+Department: \underline{\hspace{5cm}} \\
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}{0.47\textwidth}
+\centering
+\textbf{Signature of the Head of Department}\\[1cm]
+\begin{tabular}{@{}l@{}}
+Name: \underline{\hspace{6cm}} \\[0.5cm]
+Designation: \underline{\hspace{5cm}} \\[0.5cm]
+Department: \underline{\hspace{5cm}} \\
+\end{tabular}
+\end{minipage}
+\vfill
+\noindent
+\begin{minipage}{0.45\textwidth}
+\textbf{Date:} \underline{\hspace{5cm}}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\textwidth}
+\raggedleft \textbf{Place:} \underline{\hspace{5cm}}
+\end{minipage}
+\end{center}
+\end{titlepage}
+\end{document}
+
+
+
+
+
+
+%Experiment 7
+%Table
+\documentclass[a4paper,12pt]{article}  
+\usepackage{geometry}  
+\usepackage{fancyhdr}  
+\usepackage{caption}  
+\usepackage{multirow}  
+\usepackage{array}  
+\usepackage{booktabs}  
+\geometry{margin=1in}  
+\pagestyle{fancy}  
+\fancyhf{} % Clear default headers/footers  
+\fancyhead[L]{Experiment 07}  
+\fancyfoot[l]{GNDEC}  
+\fancyfoot[R]{{URN: 2435157}}   
+\renewcommand{\headrulewidth}{1pt}  
+\renewcommand{\footrulewidth}{1pt}  
+\title{\textbf{Student Record}}  
+\author{SAKSHAM}  
+\date{}  
+\begin{document}  
+\maketitle  
+\thispagestyle{fancy}   
+\noindent \large  
+\vspace{1em}  
+\begin{table}[h!]  
+\centering  
+\caption{Marks Obtained by Students in Three Subjects}  
+\renewcommand{\arraystretch}{1.3}  
+\begin{tabular}{|c|c|c|c|c|c|}  
+\hline  
+\multirow{2}{*}{\textbf{S.No}} &  
+\multirow{2}{*}{\textbf{URN}} &  
+\multirow{2}{*}{\textbf{Student Name}} &  
+\multicolumn{3}{c|}{\textbf{Marks}} \\  
+\cline{4-6}  
+ & & & \textbf{Data Structure} & \textbf{OOPs} & \textbf{Maths III} \\  
+\hline  
+1 & 243518501 & Simran   & 89 & 60 & 90 \\  
+\hline  
+2 & 243518502 & Aman & 78 & 45 & 98 \\  
+\hline  
+3 & 243518503 & Divya  & 67 & 55 & 59 \\  
+\hline  
+\end{tabular}  
+\end{table}  
+\end{document} 
+
+
+
+
+
+
+
+%Experiment 8
+%side by side figures
+\documentclass[10pt,a4paper]{article}  
+\usepackage[utf8]{inputenc}  
+\usepackage{graphicx}      
+\usepackage{subcaption}     
+\usepackage{fancyhdr}       
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}  
+\pagestyle{fancy}  
+\fancyhf{}  
+\fancyhead[L]{\textbf{Experiment 08}}  
+\fancyhead[R]{By Saksham}  
+\fancyfoot[L]{GNDEC}  
+\fancyfoot[R]{URN: 2435157}  
+\renewcommand{\headrulewidth}{1pt}  
+\renewcommand{\footrulewidth}{1pt}  
+\setlength{\headheight}{15pt}  
+\setlength{\headsep}{25pt}  
+\setlength{\footskip}{30pt}  
+\begin{document}  
+\title{{\LARGE \textbf{Experiment 08: Demonstration of Subfigures in \LaTeX}}}  
+\author{SAKSHAM}  
+\date{}  
+\maketitle  
+\thispagestyle{fancy}     
+\vspace{6pt}  
+\begin{center}  
+{\large Understanding the use of subfigure environment for arranging images side
+by-side} \end{center}  
+\vspace{12pt}  
+\noindent  
+\textbf{Objective:}    
+The aim of this experiment is to demonstrate how multiple related images can be 
+arranged neatly within a single figure environment using the \texttt{subfigure} package 
+in \LaTeX. This approach helps in presenting visual comparisons and grouped 
+graphical outputs more effectively.  
+\vspace{6pt}  
+\textbf{Description:}    
+In this experiment, three different mathematical graphs are displayed side-by-side. 
+Each graph has its own caption and label, making it easy to compare their shapes and 
+behaviors. Subfigures are especially useful in documentation, reports, and research 
+papers where grouped visual information is required.  
+\section*{Graphs Included}  
+\begin{itemize}  
+    \item \textbf{$y = x$} — A straight line representing a linear relationship.  
+    \item \textbf{$y = 3\sin x$} — A sine wave with an amplitude of 3, showing periodic 
+oscillations.  
+    \item \textbf{$y = \frac{5}{x}$} — A rational function representing a hyperbola with 
+inverse variation.  
+\end{itemize}  
+\section*{Subfigure Demo}  
+\begin{figure}[h]  
+    \centering  
+    \begin{subfigure}[b]{0.3\textwidth}  
+        \centering  
+        \includegraphics[width=\textwidth]{graph1.png}  
+        \caption{$y = x$}  
+        \label{fig:y_equals_x}  
+    \end{subfigure}  
+    \hfill  
+    \begin{subfigure}[b]{0.3\textwidth}  
+        \centering  
+        \includegraphics[width=\textwidth]{graph2.png}  
+        \caption{$y = 3\sin x$}  
+        \label{fig:three_sin_x}  
+    \end{subfigure}  
+    \hfill  
+    \begin{subfigure}[b]{0.3\textwidth}  
+        \centering  
+        \includegraphics[width=\textwidth]{graph3.png}  
+        \caption{$y = \frac{5}{x}$}  
+        \label{fig:five_over_x}  
+    \end{subfigure}  
+    \caption{Three mathematical graphs arranged side-by-side using subfigures}  
+    \label{fig:three_graphs}  
+\end{figure}  
+\end{document}
+
+
+
+
+
+
+
+%Experiment 9
+%Develop a LaTeX script to create a document that consists of two mathematical 
+%equations.
+\documentclass[12pt,a4paper]{article}  
+\usepackage{geometry}  
+\usepackage{amsmath, amssymb}  
+\geometry{margin=1in}  
+\usepackage{fancyhdr}          
+\pagestyle{fancy}  
+% for header and footer  
+\fancyhead[R]{By Saksham} % clear all header fields  
+\fancyhead[L]{\textbf{Experiment 09}}  
+\fancyfoot{} % clear all footer fields  
+\fancyfoot[L]{GNDEC} % Left footer  
+\fancyfoot[R]{URN: 2435157} % Right footer  
+\renewcommand{\footrulewidth}{1pt}   
+\title{\textbf{Mathematical Equations in LaTeX}}  
+\date{}  
+\begin{document}  
+\maketitle  
+\thispagestyle{fancy} % Show header/footer on title page  
+\section*{Mathematical Equations}  
+This document demonstrates two mathematical equations with brief explanations 
+written in \LaTeX.  
+\subsection*{1. Euler’s Formula}  
+Euler’s formula is a fundamental equation in complex analysis. It beautifully connects 
+the exponential function with the trigonometric functions sine and cosine:  
+\begin{equation} 
+e^{i\theta} 
+\cos\theta + i\sin\theta  
+\end{equation}  
+= 
+This equation shows how complex exponentials can represent rotations in the complex 
+plane. It also forms the basis of Euler's identity, which is often called the most elegant 
+equation in mathematics.  
+\vspace{0.3cm}  
+\subsection*{2. Quadratic Formula}  
+The quadratic formula provides the solutions to the quadratic equation \(ax^2 + bx + c 
+= 0\). It is derived by completing the square and is used to find the roots of any second
+degree polynomial:  
+\begin{equation} x = \frac{-b \pm 
+\sqrt{b^2 - 4ac}}{2a}  
+\end{equation}  
+This formula is widely used in algebra, physics, and engineering to find real or complex 
+solutions. The discriminant (\(b^2 - 4ac\)) helps determine whether the roots are real, 
+equal, or complex.  
+  
+\end{document}
+
+
+
+
+
+
+
+
+
+
+%Experiment 10
+%Develop a LaTeX script to demonstrate the presentation of Numbered theorems, 
+%definitions, corollaries, and lemmas in the document.  
+\documentclass{article}  
+\usepackage{geometry}  
+\geometry{margin=1in}  
+\usepackage{fancyhdr}  
+\pagestyle{fancy}  
+\fancyhf{} 
+\fancyhead[R]{By Saksham}
+\fancyhead[L]{Experiment 10}  
+\fancyfoot[L]{GNDEC}  
+\fancyfoot[R]{URN: 2435157}  
+\renewcommand{\headrulewidth}{1pt} 
+\renewcommand{\footrulewidth}{1pt}  
+\newtheorem{theorem}{Theorem}[section]  
+\newtheorem{definition}[theorem]{Definition}  
+\newtheorem{corollary}[theorem]{Corollary}  
+\newtheorem{lemma}[theorem]{Lemma}  
+\title{\LARGE \textbf{Theorem EnvironmentsX}}  
+\author{SAKSHAM}  
+\date{}  
+\begin{document}  
+\maketitle  
+\thispagestyle{fancy}  
+\section{Introduction}  
+\large  
+This document demonstrates how to present mathematical statements using LaTeX's 
+theorem environments.  
+\section{Main Results}  
+\large  
+\begin{theorem}[Pythagorean Theorem]  
+In a right-angled triangle, the square of the hypotenuse equals the sum of the squares 
+of the other two sides:  
+\begin{equation} a^2 
++ b^2 = c^2  
+\label{eq:pythagoras}  
+\end{equation}  
+\end{theorem}  
+\begin{proof}  
+\large  
+Let the triangle have sides \(a\), \(b\), and hypotenuse \(c\). By constructing squares 
+on each side and comparing areas, we find that the area of the square on the 
+hypotenuse equals the sum of the areas on the other two sides.  
+Equation~\ref{eq:pythagoras} confirms this relationship.  
+\renewcommand{\qedsymbol}{}  
+
+\end{proof}  
+\begin{definition}\large  
+A prime number is a natural number greater than 1 that has no positive divisors other 
+than 1 and itself.  
+\end{definition}  
+\begin{definition}[Fibration]\large  
+A fibration is a continuous map between topological spaces that satisfies the homotopy 
+lifting property.  
+\end{definition}  
+\begin{corollary}\large  
+The number 2 is the only even prime number.  
+\end{corollary}  
+\begin{lemma}\large  
+If \(a\) divides \(b\) and \(b\) divides \(c\), then \(a\) divides \(c\).  
+\end{lemma}  
+\section{Conclusion}\large  
+We have illustrated the use of theorem environments in LaTeX with proper numbering, 
+structure, and equation labeling.  
+\end{document} 
+
+%Experiment 11
+%Develop a LaTeX script to create a document that consists of two paragraphs 
+%with a minimum of 10 citations in it and display the reference in the section. 
+\documentclass{article}  
+\usepackage{cite}  
+\usepackage{fancyhdr}  
+\pagestyle{fancy}  
+\fancyhf{}
+\fancyhead[R]{By Saksham}
+\fancyhead[L]{Experiment 11}  
+\fancyfoot[L]{GNDEC}  
+\fancyfoot[R]{URN: 2435157}  
+\renewcommand{\footrulewidth}{0.4pt}  
+\begin{document} 
+\title{Microbial Cell Surfaces}  
+\author{SAKSHAM}  
+\date{}  
+\maketitle  
+\thispagestyle{fancy}   
+\section{Introduction}  
+Understanding the functions of microbial cell surfaces requires knowledge of their 
+structural and physical properties\cite{dufrene2002atomic}. Electron microscopy has 
+long been recognized as a key technique in microbiology to elucidate cell surface ultra 
+structure\cite{engel1999atomic}. An exciting achievement has been the development 
+of cryotechniques, which allow high-resolution imaging of cell structures in conditions 
+close to the native state\cite{franz2008atomic}. Yet direct observation in aqueous 
+solution remained impossible.  
+\section{Methods and Techniques}  
+Because of the small size of microorganisms, the physical properties of their surfaces 
+have been difficult to study\cite{marrese2017atomic}. Quantitative and qualitative 
+information on physical properties can be obtained by electron microscopy techniques, 
+X-ray photoelectron spectroscopy, infrared spectroscopy, contact, and electrophoretic 
+mobility 
+measurements 
+\cite{altman2015noncontact}. 
+\cite{author2023techniques,researcher2022approach,scientist202 
+Recentadvances 
+methodology,developer2020innovation,expert2019analysis,analyst2018study} have 
+expanded our understanding of these properties.  
+\bibliographystyle{plain}  
+\begin{thebibliography}{10}  
+\bibitem{dufrene2002atomic}  
+Dufrene, Y. F. (2002). Atomic force microscopy, a powerful tool in microbiology. Journal 
+of Bacteriology, 184(19), 5205-5213.  
+\bibitem{engel1999atomic}  
+Engel, A., & Muller, D. J. (1999). Observing single biomolecules at work with the atomic 
+force microscope. Nature Structural Biology, 6(10), 811-817.  
+\bibitem{franz2008atomic}  
+Franz, C. M., & Muller, D. J. (2008). Analyzing focal adhesion structure by atomic force 
+microscopy. Journal of Cell Science, 121(11), 1771-1780.  
+\bibitem{marrese2017atomic}  
+Marrese, M., Guarino, V., & Ambrosio, L. (2017). Atomic force microscopy: a powerful 
+tool in biomedicine. Biomedicine & Pharmacotherapy, 93, 1023-1036.  
+\bibitem{altman2015noncontact}  
+Altman, M., Lee, J. R., & Tranchina, D. (2015). Noncontact atomic force microscopy: 
+a tool for biological imaging. Science Advances, 1(8), e1500189.  
+\bibitem{author2023techniques}  
+Author, A. (2023). Advanced Techniques in Microbial Imaging. Journal of Advanced 
+Techniques, 45(12), 123-134.  
+\bibitem{researcher2022approach}  
+Researcher, B. (2022). New Approaches to Microbial Surface Studies. Microbial 
+Research Journal, 38(7), 678-689.  
+\bibitem{scientist2021methodology}  
+Scientist, C. (2021). Methodology in Microbial Surface Analysis. Analytical Methods, 
+55(9), 345-356.  
+\bibitem{developer2020innovation}  
+Developer, D. (2020). Innovations in Microscopy for Microbiology. Microscopy 
+Innovations Journal, 30(5), 567-578.  
+\bibitem{expert2019analysis}  
+Expert, E. (2019). Analysis of Microbial Surfaces: New Insights. Microbial Analysis, 
+24(4), 234-245.  
+\bibitem{analyst2018study}  
+Analyst, F. (2018). Study of Microbial Surface Properties. Journal of Microbial Studies, 
+18(3), 145-157.  
+\end{thebibliography}  
+\end{document} 
+
+
+
+
+
+
+%Experiment 12
+%Develop a LaTeX script to create a simple report and article by using suitable 
+%commands and formats of Major/Minor project report. 
+\documentclass[a4paper,12pt]{report}  
+\usepackage[utf8]{inputenc}  
+\usepackage{amsmath}  
+\usepackage{amsfonts}  
+\usepackage{amssymb}  
+\usepackage{graphicx}  
+\usepackage[left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}  
+\usepackage{fancyhdr}  
+\usepackage{lipsum}  
+% Header and footer  
+\pagestyle{fancy}  
+\fancyhf{}  
+\fancyhead[L]{Experiment 12}  
+\fancyfoot[R]{\thepage}  
+\fancyfoot[L]{GNDEC}  
+\begin{document}  
+\begin{titlepage} 
+\centering  
+{\fontsize{24pt}{28pt}\selectfont \textbf{SEMINAR AND TECHNICAL REPORT  
+WRITING}}\par  
+\vspace{1cm}  
+{\fontsize{12pt}{14pt}\selectfont {SUBMITTED IN PARTIAL FULFILMENT OF THE  
+REQUIREMENTS FOR THE AWARD OF THE DEGREE OF}}\par  
+\vspace{0.5cm}  
+{\fontsize{14pt}{16pt}\selectfont \textbf{BACHELOR OF TECHNOLOGY}}\par  
+{\fontsize{14pt}{16pt}\selectfont 
+(Computer Science and Engineering)}\par     
+\vspace{2cm}  
+\includegraphics[width=5cm]{GNDEC.png}\par\vspace{2cm}  
+\begin{center}  
+\vspace{1em}   
+\begin{minipage}[t]{0.46\textwidth}  
+        \raggedright  
+        \textbf{SUBMITTED BY}\\[0.6em]  
+        SAKSHAM\\[0.4em]  
+        URN: 2435157\\[0.4em]  
+        Section: CSE (E1)  
+      \end{minipage}  
+      \hfill  
+      \begin{minipage}[t]{0.46\textwidth}  
+        \raggedleft  
+        \textbf{SUBMITTED TO}\\[0.6em]  
+        Dr. Amandeep Kaur Sohal\\[0.4em]  
+        Assistant Professor (CSE)  
+      \end{minipage}  
+    \end{center}  
+  
+\vfill  
+  
+    {\fontsize{14pt}{16pt}\selectfont \textbf{DEPARTMENT OF COMPUTER SCIENCE 
+AND ENGINEERING}}\par  
+     {\fontsize{14pt}{16pt}\selectfont \textbf{GURU NANAK DEV ENGINEERING  
+COLLEGE}}\par  
+    {\fontsize{14pt}{16pt}\selectfont \textbf{LUDHIANA, 141006}}\par  
+    \vspace{0.5cm}  
+  
+\end{titlepage}  
+  
+\begin{abstract}  
+This is a brief summary of the report. It outlines the main objectives, methods, and 
+conclusions of the project.  
+\lipsum[1]  
+\end{abstract}  
+  
+\tableofcontents  
+\newpage  
+  
+\chapter{Introduction}  
+\section{Background}  
+\lipsum[1]  
+\section{Objectives}  
+\lipsum[2]  
+\newpage  
+\chapter{Methodology}  
+\section{Data Collection}  
+\lipsum[1]  
+  
+\section{Analysis}  
+\lipsum[1]  
+  
+\newpage  
+  
+\chapter{Results}  
+\section{Findings}  
+\lipsum[1]  
+  
+\newpage  
+  
+\chapter{Conclusion}  
+\lipsum[1]  
+  
+\newpage  
+  
+\begin{thebibliography}{9}  
+\bibitem{latexcompanion}  
+Leslie Lamport,  
+\textit{LaTeX: A Document Preparation System}, Addison 
+Wesley, 1986.  
+  
+\bibitem{einstein}  
+Albert Einstein,  
+\textit{Relativity: The Special and the General Theory}, H. 
+Holt and Company, 1920.  
+\end{thebibliography}  
+  
+\end{document}
+
+
+
+
+
+
+
+%IEEE
+\documentclass{article}
+% Use the standard article class
+\usepackage[a4paper, margin=1in]{geometry}
+% Set page size and margins
+\usepackage{multicol}
+% Allows multiple columns in the document
+\usepackage{fancyhdr}
+% Allows headers and footers
+\begin{document}
+% Begin document content
+\pagestyle{fancy}
+% For page headers/footers
+\fancyhff}
+% Clear default header and footer fields
+\fancyhead[L]{2020 IEEE International Conference on Artificial Intelligence and
+Computer Applications (ICAICA)}
+\begin{center}
+% Center the title
+\textbf{\LARGE Research on Expert System in Power Network Operation Ticket}
+lend{center}
+\setlength{\columnsep}{8pt}
+% Set spacing between columns
+\begin{multicols}{3}
+% Set 3-column layout
+\begin{center}
+% First author block centered
+\textbf{Yuhang Li}||
+Nari Technology (State Grid Electric Power Research Institute) Co., Ltd.Il
+Nanjing, Chinall
+Nari-Tech Power Distribution \& Rural Electrification Branch Companyll
+Nanjing, China
+lend{center}
+\columnbreak
+\begin{center}
+% Second author
+\textbf{Chenxi Huang}||
+Nari Technology (State Grid Electric Power Research Institute) Co., Ltd.||
+Nanjing, China||
+Nari-Tech Power Distribution \& Rural Electrification Branch Company||
+Nanjing, China
+\end{center}
+\columnbreak
+\begin{center}
+% Third author
+\textbf{Chao Lu}||
+Nari Technology (State Grid Electric Power Research Institute) Co., Ltd.Il
+Nanjing, China||
+Nari-Tech Power Distribution \& Rural Electrification Branch Company||
+Nanjing, China
+\end{center}
+\end{multicols}
+\begin{abstract}
+\textbf{\textit{Abstract-}} This paper realizes the automatic generation system of
+reversing operation ticket, aiming at the problem of insufficient flexibility and
+intelligence by expert system technology. By analyzing the characteristics of the power
+system, the knowledge base and the inference engine which constitute the operation
+ticket expert system are studied separately to design a knowledge base with a more
+concise knowledge representation. The Rete algorithm was used in the study of
+reasoning mechanism, and the design of the operation ticket expert system was
+completed finally.
+\textit{Keywords-} artificial intelligence, operation ticket, expert system, rete algorithm
+\end{abstract}
+\end{document}
+
+
+
+
+
+
+%intro page
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage[margin=1in]{geometry}
+\usepackage{times}
+
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+
+% ---- TITLE ----
+\vspace*{1cm}
+\Large \textbf{SEMINAR AND TECHNICAL\\REPORT WRITING} \\
+\vspace{1cm}
+
+\small \textbf{SUBMITTED IN PARTIAL FULFILMENT OF THE REQUIREMENTS FOR THE\\AWARD OF THE DEGREE OF} \\
+\vspace{1cm}
+
+\Large \textbf{BACHELOR OF TECHNOLOGY} \\
+\textbf{(Computer Science and Engineering)} \\
+\vspace{2cm}
+
+% ---- LOGO ----
+\includegraphics[width=4cm]{GNDEC.png} \\
+\vspace{2cm}
+
+% ---- SUBMITTED BY / TO ----
+\begin{tabular}{c c}
+\textbf{SUBMITTED BY} & \textbf{SUBMITTED TO} \\[10pt]
+\textbf{SAKSHAM} & Dr. Amandeep Kaur Sohal \\
+URN: 2435157 & Assistant Professor (CSE) \\
+Section: CSE (E1) &  \\
+\end{tabular}
+
+\vspace{2cm}
+
+% ---- COLLEGE DETAILS ----
+\textbf{DEPARTMENT OF COMPUTER SCIENCE AND\\ ENGINEERING} \\
+\textbf{GURU NANAK DEV ENGINEERING COLLEGE} \\
+\textbf{LUDHIANA, 141006}
+
+\end{center}
+\end{document}
